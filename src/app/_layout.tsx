@@ -6,6 +6,7 @@ export default function RootLayout() {
   return (
       <AuthProvider>
           <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="register" options={{ title: 'Register' }} />
               <Stack.Screen name="login" options={{ title: 'Login' }} />
               <Stack.Screen name='(tabs)' />
           </Stack>
