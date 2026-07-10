@@ -225,7 +225,7 @@ function StatsCard({ icon, title, buttonLabel, linkTo, onClick, onDisabled }: St
     const handlePress = () => {
         if (onDisabled) return;
         if (linkTo) {
-            router.push(linkTo as Href); // TODO: Add route here when ready
+            router.push(linkTo as Href);
         } else if (onClick) {
             onClick();
         }
