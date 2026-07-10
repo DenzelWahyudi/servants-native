@@ -101,7 +101,12 @@ export default function LoginScreen() {
 
                     {/* Password Input */}
                     <View className="mb-6">
-                        <Text className="text-zinc-400 text-xs uppercase tracking-wider font-bold mb-2 ml-1">Password</Text>
+                        <View className="flex-row items-center justify-between mb-2 px-1">
+                            <Text className="text-zinc-400 text-xs uppercase tracking-wider font-bold">Password</Text>
+                            <Pressable onPress={() => router.push("/forgot-password")}>
+                                <Text className="text-amber-400 text-xs font-semibold">Forgot?</Text>
+                            </Pressable>
+                        </View>
                         <View className={`flex-row items-center bg-slate-950 rounded-2xl border ${focusedField === 'password' ? 'border-amber-400 bg-slate-900' : 'border-slate-800'} px-4 h-14`}>
                             <Feather name="lock" size={18} color={focusedField === 'password' ? '#fbbf24' : '#64748b'} className="mr-3" />
                             <TextInput
