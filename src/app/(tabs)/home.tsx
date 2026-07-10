@@ -1,16 +1,14 @@
 import React, { useState, useCallback } from 'react'
-import { View, Text, Image, Pressable, ScrollView, Modal, ActivityIndicator } from 'react-native'
-import { useFocusEffect, router } from 'expo-router'
+import { View, Text, Pressable, ScrollView, Modal, ActivityIndicator } from 'react-native'
+import { useFocusEffect, router, Href } from 'expo-router'
 import { useAuth } from "@/hooks/useAuth"
 import { startOfToday, isEqual, startOfDay, format } from "date-fns"
 import { API_URL } from "../../../api"
+import { Ionicons } from '@expo/vector-icons'
 
-import bell from '../../images/icons/bell.svg'
-import calendar from '../../images/icons/calendar.svg'
-import user from '../../images/icons/user.svg'
 
 type StatsCardProps = {
-    icon: any
+    icon: keyof typeof Ionicons.glyphMap
     title: string
     buttonLabel: string
     linkTo?: string
@@ -142,20 +140,20 @@ export default function HomeTab() {
             >
                 <StatsCard 
                     linkTo="/schedule" 
-                    icon={bell} 
+                    icon="notifications" 
                     title={`${todayServiceCount} Service Reminders Today`} 
                     buttonLabel="View Schedule" 
                 />
                 <StatsCard 
                     onClick={getAssignments} 
-                    icon={user} 
+                    icon="person" 
                     title="Pending Sign-ups" 
                     buttonLabel={loading ? "Loading..." : "Review Now"} 
                     onDisabled={loading}
                 />
                 <StatsCard 
                     linkTo="/openings" 
-                    icon={calendar} 
+                    icon="calendar" 
                     title={`Open Recruitment: ${openRoles ?? 0}`} 
                     buttonLabel="Fill Remaining Roles" 
                 />
@@ -174,7 +172,7 @@ export default function HomeTab() {
                     <View className="bg-slate-900 w-full max-h-full rounded-3xl overflow-hidden shadow-2xl relative z-10 border border-slate-800">
                         <View className="px-6 py-5 border-b border-slate-800 flex-row justify-between items-center bg-slate-900/90">
                             <Text className="text-xl font-bold text-zinc-50">Pending Assignments</Text>
-                            <Pressable onPress={() => setAssignments(null)} className="p-2 -mr-2 active:opacity-70">
+                            <Pressable onPress={() => setAssignments(null)} className="p-2 -mr-2" style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}>
                                 <Text className="text-zinc-400 font-bold text-lg">✕</Text>
                             </Pressable>
                         </View>
@@ -227,7 +225,7 @@ function StatsCard({ icon, title, buttonLabel, linkTo, onClick, onDisabled }: St
     const handlePress = () => {
         if (onDisabled) return;
         if (linkTo) {
-            router.push('' as any); // TODO: Add route here when ready
+            router.push(linkTo as Href); // TODO: Add route here when ready
         } else if (onClick) {
             onClick();
         }
@@ -237,7 +235,7 @@ function StatsCard({ icon, title, buttonLabel, linkTo, onClick, onDisabled }: St
         <View className="bg-white rounded-3xl p-5 w-60 shadow-sm border border-zinc-100 flex flex-col justify-between" style={{ height: 180 }}>
             <View>
                 <View className="bg-amber-100/50 w-12 h-12 rounded-2xl items-center justify-center mb-4">
-                    <Image source={icon} className="w-6 h-6" resizeMode="contain" style={{ tintColor: '#d97706' }} />
+                    <Ionicons name={icon} size={24} color="#d97706" />
                 </View>
                 <Text className="text-zinc-800 font-bold text-base leading-snug">{title}</Text>
             </View>
@@ -245,9 +243,10 @@ function StatsCard({ icon, title, buttonLabel, linkTo, onClick, onDisabled }: St
             <Pressable
                 onPress={handlePress}
                 disabled={onDisabled}
-                className={`mt-auto py-3 px-4 rounded-xl items-center justify-center flex-row active:opacity-80 transition-opacity ${
+                className={`mt-auto py-3 px-4 rounded-xl items-center justify-center flex-row ${
                     onDisabled ? 'bg-zinc-100' : 'bg-amber-400'
                 }`}
+                style={({ pressed }) => ({ opacity: pressed && !onDisabled ? 0.8 : 1 })}
             >
                 {onDisabled && <ActivityIndicator size="small" color="#a1a1aa" className="mr-2" />}
                 <Text className={`font-bold text-sm ${onDisabled ? 'text-zinc-400' : 'text-amber-950'}`}>

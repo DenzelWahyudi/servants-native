@@ -23,6 +23,36 @@ export default function TabLayout() {
                     ),
                 }}
             />
+
+            <Tabs.Screen
+                name='schedule'
+                options={{
+                    title: 'Schedule',
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name='calendar' size={size} color={color} />
+                    ),
+                }}
+            />
+
+            <Tabs.Screen
+                name='openings'
+                options={{
+                    title: 'Openings',
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name='menu' size={size} color={color} />
+                    ),
+                }}
+            />
+
+            <Tabs.Screen
+                name='chats'
+                options={{
+                    title: 'Chat',
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name='chatbox' size={size} color={color} />
+                    ),
+                }}
+            />
         </Tabs>
     );
 }
