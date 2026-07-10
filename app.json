@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "servants-native",
-    "slug": "servants-native",
+    "slug": "servants",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -39,6 +39,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "fce7cdc4-cbc0-4c41-a8ba-c5e0d6ff7ec5"
+      }
+    },
+    "owner": "markie77"
   }
 }
