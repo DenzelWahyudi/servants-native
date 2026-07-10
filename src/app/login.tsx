@@ -136,6 +136,13 @@ export default function LoginScreen() {
                             {loading ? "Signing in..." : "Sign In"}
                         </Text>
                     </Pressable>
+
+                    <View className="flex-row items-center justify-center mt-6 gap-2">
+                        <Text className="text-zinc-400 text-sm">Don't have an account?</Text>
+                        <Pressable onPress={() => router.push("/register")}>
+                            <Text className="text-amber-400 text-sm font-semibold">Register</Text>
+                        </Pressable>
+                    </View>
                 </Animated.View>
 
             </ScrollView>
