@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { Feather } from "@expo/vector-icons";
 
-export default function Register() {
+export default function RegisterScreen() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",

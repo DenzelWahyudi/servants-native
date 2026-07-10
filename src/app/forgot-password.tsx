@@ -12,7 +12,7 @@ interface Form {
     code: string;
 }
 
-export default function ForgotPassword() {
+export default function ForgotPasswordScreen() {
     const [form, setForm] = useState<Form>({
         phoneNumber: "",
         new_password: "",
