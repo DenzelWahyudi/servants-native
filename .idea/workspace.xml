@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6370198d-d1e3-4c9a-9036-05be3dfa2cf3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Heading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/AuthContext.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/AuthProvider.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useAuth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/tokenUtils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/AGENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(tabs)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(tabs)/home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/_layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +27,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "customColor": "",
@@ -35,7 +51,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -48,6 +64,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\denze\Documents\servants-native\src\app" />
+      <recent name="C:\Users\denze\Documents\servants-native\src\(tabs)" />
       <recent name="C:\Users\denze\Documents\servants-native\src" />
     </key>
   </component>
@@ -65,7 +83,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1783668938059</updated>
-      <workItem from="1783668940153" duration="3070000" />
+      <workItem from="1783668940153" duration="11580000" />
     </task>
     <servers />
   </component>
