@@ -90,7 +90,7 @@ export default function LoginScreen() {
                                 value={formData.phoneNumber}
                                 onChangeText={handleChange("phoneNumber")}
                                 keyboardType="phone-pad"
-                                placeholder="+62 812 3456 7890"
+                                placeholder="+6281234567890"
                                 placeholderTextColor="#475569"
                                 onFocus={() => setFocusedField('phone')}
                                 onBlur={() => setFocusedField(null)}
