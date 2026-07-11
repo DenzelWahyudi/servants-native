@@ -101,12 +101,17 @@ function ChatBubble({ chat, isMine, members, onReply, onReadStatus, scrollToMess
         transform: [{ translateX: translateX.value }]
     }));
 
-    const isReadByAll = members && chat.readBy.length >= members.length - 1; // -1 for self
+    const readByOthersCount = chat.readBy.filter(r => r.userId !== chat.userId).length;
+    const isReadByAll = members && members.length > 1 && readByOthersCount >= members.length - 1; // -1 for self
     
+    const timeSpace = isMine 
+        ? '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0' 
+        : '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0';
+
     return (
         <GestureDetector gesture={pan}>
             <Animated.View style={[style, { alignSelf: isMine ? 'flex-end' : 'flex-start', maxWidth: '80%', marginBottom: 8 }]}>
-                <View className={`rounded-2xl px-3 py-2 shadow-sm ${isMine ? 'bg-[#dcf8c6] rounded-tr-sm' : 'bg-white rounded-tl-sm'}`}>
+                <View className={`relative rounded-2xl px-3 pt-2 pb-2 shadow-sm ${isMine ? 'bg-[#dcf8c6] rounded-tr-sm' : 'bg-white rounded-tl-sm'}`}>
                     {!isMine && <Text className="text-rose-500 font-bold text-[13px] mb-1">{chat.userName}</Text>}
                     
                     {chat.replyTo && (
@@ -124,13 +129,19 @@ function ChatBubble({ chat, isMine, members, onReply, onReadStatus, scrollToMess
                             className="bg-black/10 rounded-lg p-3 mb-1"
                             onPress={() => Alert.alert('Attachment', 'Viewing files will be supported soon.')}
                         >
-                            <Text className="text-zinc-800 font-medium">{chat.message || 'Attached File'}</Text>
+                            <Text className="text-zinc-800 font-medium">
+                                {chat.message || 'Attached File'}
+                                <Text className="text-transparent text-[10px]">{timeSpace}</Text>
+                            </Text>
                         </Pressable>
                     ) : (
-                        <Text className="text-zinc-900 text-[15px] leading-5">{chat.message}</Text>
+                        <Text className="text-zinc-900 text-[15px] leading-5">
+                            {chat.message}
+                            <Text className="text-transparent text-[10px]">{timeSpace}</Text>
+                        </Text>
                     )}
 
-                    <View className="flex-row items-center justify-end mt-1 gap-1">
+                    <View className="flex-row items-center absolute bottom-1.5 right-3 gap-1">
                         <Text className="text-zinc-500 text-[10px]">{format(new Date(chat.createdAt), 'HH:mm')}</Text>
                         {isMine && <CheckCheck size={14} color={isReadByAll ? '#3b82f6' : '#9ca3af'} />}
                     </View>
@@ -570,11 +581,16 @@ export default function ChatsTab() {
                     {/* Message Preview */}
                     {readStatusChat && (
                         <View className="bg-white p-4 shadow-sm border-b border-zinc-200 items-end">
-                            <View className="bg-[#dcf8c6] rounded-2xl rounded-tr-sm px-3 py-2 max-w-[80%] shadow-sm">
-                                <Text className="text-zinc-900 text-[15px] leading-5">{readStatusChat.message}</Text>
-                                <View className="flex-row items-center justify-end mt-1 gap-1">
+                            <View className="relative bg-[#dcf8c6] rounded-2xl rounded-tr-sm px-3 pt-2 pb-2 max-w-[80%] shadow-sm">
+                                <Text className="text-zinc-900 text-[15px] leading-5">
+                                    {readStatusChat.message}
+                                    <Text className="text-transparent text-[10px]">
+                                        {'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'}
+                                    </Text>
+                                </Text>
+                                <View className="flex-row items-center absolute bottom-1.5 right-3 gap-1">
                                     <Text className="text-zinc-500 text-[10px]">{format(new Date(readStatusChat.createdAt), 'HH:mm')}</Text>
-                                    <CheckCheck size={14} color={members && readStatusChat.readBy.length >= members.length - 1 ? '#3b82f6' : '#9ca3af'} />
+                                    <CheckCheck size={14} color={members && members.length > 1 && readStatusChat.readBy.filter(r => r.userId !== readStatusChat.userId).length >= members.length - 1 ? '#3b82f6' : '#9ca3af'} />
                                 </View>
                             </View>
                         </View>
