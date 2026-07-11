@@ -40,7 +40,7 @@ export async function registerForPushNotificationsAsync() {
     try {
         // Retrieve the push token from Expo
         token = (await Notifications.getExpoPushTokenAsync({
-            projectId: Constants.expoConfig?.extra?.eas?.projectId,
+            projectId: Constants.easConfig?.projectId,
         })).data;
     } catch (e) {
         console.log("Error getting push token:", e);
