@@ -1,1 +1,1 @@
-export const API_URL = "https://servants-03xr.onrender.com";
+export const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:5000';
