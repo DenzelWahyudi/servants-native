@@ -173,6 +173,14 @@ export default function ChatsTab() {
     const [searchQuery, setSearchQuery] = useState("")
 
     const scrollViewRef = useRef<ScrollView>(null)
+    const messageLayouts = useRef<{ [key: string]: number }>({});
+
+    const scrollToMessage = useCallback((chatId: string) => {
+        const yOffset = messageLayouts.current[chatId];
+        if (yOffset !== undefined && scrollViewRef.current) {
+            scrollViewRef.current.scrollTo({ y: yOffset, animated: true });
+        }
+    }, []);
 
     // Animation values
     const chatRoomTranslateX = useSharedValue(width);
@@ -191,12 +199,7 @@ export default function ChatsTab() {
                 })
                 const data: Service[] = await response.json();
                 const sorted = data.sort((a,b) => b.unreadMessage - a.unreadMessage)
-                if (searchQuery.length < 1) {
-                    setAssignedServices(sorted)
-                } else {
-                    const filtered = data.filter((s) => s.serviceName.toLowerCase().includes(searchQuery.toLowerCase()))
-                    setAssignedServices(filtered)
-                }
+                setAssignedServices(sorted)
             }
 
             async function fetchUserId() {
@@ -215,7 +218,7 @@ export default function ChatsTab() {
                 void fetchAssignedServices()
                 void fetchUserId()
             }
-        }, [token, searchQuery])
+        }, [token])
     )
 
     useEffect(() => {
@@ -342,6 +345,8 @@ export default function ChatsTab() {
         transform: [{ translateX: readStatusTranslateX.value }]
     }));
 
+    const displayedServices = assignedServices?.filter(s => s.serviceName.toLowerCase().includes(searchQuery.toLowerCase())) || [];
+
     return(
         <GestureHandlerRootView className="flex-1 bg-zinc-50">
             {/* Main Chat List Screen */}
@@ -361,12 +366,12 @@ export default function ChatsTab() {
                 </View>
 
                 <ScrollView className="flex-1 px-4" contentContainerClassName="pb-20">
-                    {assignedServices?.length === 0 ? (
+                    {displayedServices.length === 0 ? (
                         <View className="mt-10 items-center justify-center">
                             <Text className="text-zinc-500 font-medium text-base">No chats found.</Text>
                         </View>
                     ) : (
-                        assignedServices?.map((s) => (
+                        displayedServices.map((s) => (
                             <Pressable 
                                 key={s.serviceId}
                                 className="flex-row items-center py-4 px-2 border-b border-zinc-100"
@@ -449,7 +454,12 @@ export default function ChatsTab() {
                             const showDateSeparator = !prevDate || currentDate.toDateString() !== prevDate.toDateString()
 
                             return (
-                                <View key={c._id}>
+                                <View 
+                                    key={c._id}
+                                    onLayout={(e) => {
+                                        messageLayouts.current[c._id] = e.nativeEvent.layout.y;
+                                    }}
+                                >
                                     {showDateSeparator && (
                                         <View className="items-center my-3">
                                             <View className="bg-white/80 px-3 py-1 rounded-lg shadow-sm">
@@ -463,7 +473,7 @@ export default function ChatsTab() {
                                         members={members}
                                         onReply={(chat) => setMessage(prev => ({ ...prev, replyTo: { chatId: chat._id, userId: chat.userId, userName: chat.userName, message: chat.message } }))}
                                         onReadStatus={(chat) => setReadStatusChat(chat)}
-                                        scrollToMessage={() => {}} // Simple mock for scrolling
+                                        scrollToMessage={scrollToMessage}
                                     />
                                 </View>
                             )
