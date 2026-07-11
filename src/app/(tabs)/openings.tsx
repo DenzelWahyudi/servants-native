@@ -172,7 +172,7 @@ export default function OpeningsTab() {
                                                 date: format(new Date(service.date), 'd MMMM yyyy'),
                                                 time: service.time
                                             })}
-                                            className="bg-amber-400 py-3.5 rounded-xl items-center justify-center flex-row"
+                                            className="bg-amber-400 py-2.5 rounded-xl items-center justify-center flex-row"
                                             style={({ pressed }) => ({ opacity: pressed ? 0.8 : 1 })}
                                         >
                                             <Text className="font-bold text-amber-950 text-base">Sign Up</Text>
