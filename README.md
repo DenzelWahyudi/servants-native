@@ -1,57 +1,85 @@
-# Welcome to your Expo app 👋
+# Servants Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Servants is a mobile application built with React Native and Expo, designed to streamline scheduling, role assignments, and communication for volunteers and service workers (e.g., church services, event organizations, or volunteer teams).
 
-## Get started
+## 🚀 Features
 
-1. Install dependencies
+- **Authentication**: Secure login, registration, and password recovery.
+- **Home Dashboard**: Get a quick overview of upcoming services, pending sign-ups, and open recruitment roles.
+- **Schedule Management**: Keep track of your assigned roles and upcoming service schedules.
+- **Openings**: Browse through unfilled roles and volunteer for specific tasks where help is needed.
+- **Chats**: In-app messaging functionality to stay in touch with other team members.
+- **Role Assignments**: Track the status (pending, confirmed, etc.) of your service assignments.
 
+## 🛠️ Tech Stack
+
+- **Framework**: [React Native](https://reactnative.dev/) & [Expo](https://expo.dev/)
+- **Routing**: [Expo Router](https://docs.expo.dev/router/introduction/) (File-based routing)
+- **Styling**: [NativeWind v4](https://www.nativewind.dev/) (Tailwind CSS for React Native)
+- **Icons**: `@expo/vector-icons` & `lucide-react-native`
+- **Utilities**: `date-fns` for robust date formatting and manipulation
+
+## 📂 Project Structure
+
+The project uses Expo Router's file-based routing mechanism. Key directories include:
+
+```text
+src/
+├── app/                  # Application routes (Expo Router)
+│   ├── (tabs)/           # Main tab navigation (Home, Schedule, Openings, Chats)
+│   ├── login.tsx         # Login screen
+│   ├── register.tsx      # Registration screen
+│   ├── forgot-password.tsx
+│   └── _layout.tsx       # Root layout & Authentication provider
+├── components/           # Reusable UI components
+├── context/              # React Context providers (e.g., AuthProvider)
+├── hooks/                # Custom React hooks (e.g., useAuth)
+├── utils/                # Utility functions and helpers
+└── images/               # Local image assets
+```
+
+## 🏁 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+- Expo Go app on your physical device, or an iOS Simulator / Android Emulator installed.
+
+### Installation
+
+1. **Clone the repository** (if you haven't already):
+   ```bash
+   git clone <repository-url>
+   cd servants-native
+   ```
+
+2. **Install dependencies**:
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Environment Setup**:
+   Ensure you have a `.env` file in the root directory based on `.env.example` that includes your backend `API_URL` and any other required secrets.
 
+4. **Start the development server**:
+   ```bash
+   npm start
+   ```
+   Or explicitly using Expo:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+5. **Run the app**:
+   - Press `a` to open in Android Emulator
+   - Press `i` to open in iOS Simulator
+   - Scan the QR code with the **Expo Go** app on your physical device.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📜 Scripts
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# servants-native
+- `npm start` - Starts the Expo development server.
+- `npm run android` - Starts the app in development mode on Android.
+- `npm run ios` - Starts the app in development mode on iOS.
+- `npm run web` - Starts the app in development mode for the web.
+- `npm run lint` - Runs ESLint to check for code issues.
