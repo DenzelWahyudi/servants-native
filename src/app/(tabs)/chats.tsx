@@ -409,8 +409,12 @@ export default function ChatsTab() {
 
             {/* Chat Room Overlay */}
             <Animated.View style={[chatRoomStyle, { position: 'absolute', width: '100%', height: '100%', backgroundColor: '#f4f4f5' }]}>
-                {/* Header */}
-                <View className="bg-slate-900 pt-12 pb-4 px-2 flex-row items-center shadow-md z-10">
+                <KeyboardAvoidingView 
+                    behavior="padding"
+                    className="flex-1"
+                >
+                    {/* Header */}
+                    <View className="bg-slate-900 pt-12 pb-4 px-2 flex-row items-center shadow-md z-10">
                     <Pressable 
                         className="p-2 mr-1"
                         onPress={() => {
@@ -438,10 +442,7 @@ export default function ChatsTab() {
                 </View>
 
                 {/* Chat Area */}
-                <KeyboardAvoidingView 
-                    behavior={Platform.OS === 'ios' ? 'padding' : undefined} 
-                    className="flex-1 bg-[#efeae2]"
-                >
+                <View className="flex-1 bg-[#efeae2]">
                     <ScrollView 
                         ref={scrollViewRef}
                         className="flex-1 px-3 pt-4"
@@ -523,6 +524,7 @@ export default function ChatsTab() {
                         </View>
                         {error && <Text className="text-center text-xs text-rose-500 mt-2">{error}</Text>}
                     </View>
+                </View>
                 </KeyboardAvoidingView>
             </Animated.View>
 
