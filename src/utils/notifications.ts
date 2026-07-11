@@ -1,5 +1,6 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -38,7 +39,9 @@ export async function registerForPushNotificationsAsync() {
     
     try {
         // Retrieve the push token from Expo
-        token = (await Notifications.getExpoPushTokenAsync()).data;
+        token = (await Notifications.getExpoPushTokenAsync({
+            projectId: Constants.expoConfig?.extra?.eas?.projectId,
+        })).data;
     } catch (e) {
         console.log("Error getting push token:", e);
     }
