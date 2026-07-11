@@ -54,7 +54,7 @@ export default function HomeTab() {
     const [schedule, setSchedule] = useState<Schedule[] | null>(null)
     const [roles, setRoles] = useState<Role[] | null>(null)
     const [assignments, setAssignments] = useState<Assignment[] | null>(null)
-    const { token } = useAuth();
+    const { token, logout } = useAuth();
     const [loading, setLoading] = useState(false)
 
     const todayServiceCount = schedule?.filter((s) => {
@@ -126,11 +126,23 @@ export default function HomeTab() {
 
     return (
         <ScrollView className="flex-1 bg-zinc-50 pt-3" contentContainerClassName="pb-10">
-            <View className="px-6 pt-10 pb-6">
-                <Text className="text-3xl font-bold text-zinc-900">
-                    Hello, <Text className="text-amber-500">{userName ?? '...'}</Text>
-                </Text>
-                <Text className="text-zinc-500 mt-1 font-medium text-base">Here is what's happening today</Text>
+            <View className="px-6 pt-10 pb-6 flex-row justify-between items-center">
+                <View>
+                    <Text className="text-3xl font-bold text-zinc-900">
+                        Hello, <Text className="text-amber-500">{userName ?? '...'}</Text>
+                    </Text>
+                    <Text className="text-zinc-500 mt-1 font-medium text-base">Here is what's happening today</Text>
+                </View>
+                <Pressable 
+                    onPress={async () => {
+                        await logout();
+                        router.push('/login');
+                    }}
+                    className="p-2 bg-zinc-200/50 rounded-full"
+                    style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
+                >
+                    <Ionicons name="log-out-outline" size={24} color="#71717a" />
+                </Pressable>
             </View>
 
             <ScrollView 
