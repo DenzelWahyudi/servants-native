@@ -278,42 +278,68 @@ export function UpcomingServicesMobile(){
 
     return (
         <View className="pb-10">
-            <Text className="text-2xl font-bold text-zinc-900 mb-6">Upcoming Services</Text>
-            <View className="gap-5">
+            <View className="flex-row items-center justify-between mb-6">
+                <Text className="text-2xl font-bold text-zinc-900">Upcoming Services</Text>
+                <View className="bg-zinc-100 p-2 rounded-full">
+                    <Ionicons name="filter" size={16} color="#71717a" />
+                </View>
+            </View>
+            
+            <View className="gap-6">
                 {services?.map((s) => (
-                    <View key={s._id} className="rounded-3xl bg-white shadow-sm border border-zinc-100 p-5">
+                    <View key={s._id} className="rounded-[28px] bg-white shadow-sm border border-zinc-200/60 p-6">
                         <View className="flex-row justify-between items-start mb-5">
                             <View className="flex-1 mr-4">
-                                <Text className="text-zinc-900 font-bold text-lg mb-1 leading-tight">{s.name}</Text>
-                                <Text className="text-zinc-500 font-medium">{format(new Date(s.date), 'd MMMM yyyy')}</Text>
-                            </View>
-                            <View className="bg-zinc-100/80 px-3 py-2 rounded-xl">
-                                <Text className="text-zinc-700 font-bold text-xs">{s.time}</Text>
-                            </View>
-                        </View>
-                        
-                        <View className="h-px bg-zinc-100 mb-5" />
-                        
-                        <View className="flex-row flex-wrap gap-2 mb-6">
-                            {s.roles?.map((r) => (
-                                <View key={r._id} className="bg-zinc-50 border border-zinc-200 px-3.5 py-1.5 rounded-full">
-                                    <Text className="text-zinc-600 text-xs font-semibold">{r.name}</Text>
+                                <Text className="text-zinc-900 font-bold text-xl mb-2 leading-tight">{s.name}</Text>
+                                <View className="flex-row items-center">
+                                    <Ionicons name="calendar-outline" size={14} color="#71717a" />
+                                    <Text className="text-zinc-500 font-medium ml-1.5 text-sm">{format(new Date(s.date), 'EEEE, d MMMM yyyy')}</Text>
                                 </View>
-                            ))}
+                            </View>
+                            <View className="bg-amber-50 border border-amber-100/50 px-3 py-2 rounded-2xl flex-row items-center shadow-sm shadow-amber-100/20">
+                                <Ionicons name="time-outline" size={14} color="#d97706" />
+                                <Text className="text-amber-700 font-bold text-xs ml-1.5">{s.time}</Text>
+                            </View>
                         </View>
                         
-                        <View className="flex-row justify-end mt-auto">
-                            <Text className={`font-bold text-sm tracking-wide ${
-                                s.status === "Roles Closed" ? "text-rose-500" : "text-emerald-500"
+                        <View className="mb-6">
+                            <Text className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-3">Roles Overview</Text>
+                            <View className="flex-row flex-wrap gap-2">
+                                {s.roles && s.roles.length > 0 ? s.roles.map((r) => (
+                                    <View key={r._id} className="bg-zinc-50 px-3 py-1.5 rounded-xl border border-zinc-200/80 flex-row items-center">
+                                        <View className="w-1.5 h-1.5 rounded-full bg-zinc-300 mr-2" />
+                                        <Text className="text-zinc-600 text-xs font-semibold">{r.name}</Text>
+                                    </View>
+                                )) : (
+                                    <Text className="text-zinc-400 text-xs italic">No roles specified</Text>
+                                )}
+                            </View>
+                        </View>
+                        
+                        <View className="flex-row items-center justify-between pt-4 border-t border-zinc-100/80">
+                            <Text className="text-zinc-400 text-xs font-medium">Service Status</Text>
+                            <View className={`px-3 py-1.5 rounded-lg flex-row items-center ${
+                                s.status === "Roles Closed" ? "bg-rose-50 border border-rose-100/50" : "bg-emerald-50 border border-emerald-100/50"
                             }`}>
-                                {s.status}
-                            </Text>
+                                <View className={`w-1.5 h-1.5 rounded-full mr-2 ${
+                                    s.status === "Roles Closed" ? "bg-rose-500" : "bg-emerald-500"
+                                }`} />
+                                <Text className={`font-bold text-[11px] uppercase tracking-wider ${
+                                    s.status === "Roles Closed" ? "text-rose-600" : "text-emerald-600"
+                                }`}>
+                                    {s.status}
+                                </Text>
+                            </View>
                         </View>
                     </View>
                 ))}
                 {(!services || services.length === 0) && (
-                    <View className="py-10 items-center justify-center">
-                        <Text className="text-zinc-400 font-medium text-base">No upcoming services.</Text>
+                    <View className="py-12 items-center justify-center bg-zinc-50/50 rounded-[28px] border border-zinc-100 border-dashed">
+                        <View className="bg-zinc-100 w-16 h-16 rounded-full items-center justify-center mb-4">
+                            <Ionicons name="calendar-clear-outline" size={28} color="#a1a1aa" />
+                        </View>
+                        <Text className="text-zinc-500 font-medium text-base text-center">No upcoming services</Text>
+                        <Text className="text-zinc-400 text-sm mt-1 text-center">Check back later for new schedules</Text>
                     </View>
                 )}
             </View>
