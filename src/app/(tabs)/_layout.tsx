@@ -1,7 +1,34 @@
+import { useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { registerForPushNotificationsAsync } from '@/utils/notifications';
+import { useAuth } from '@/hooks/useAuth';
+import { API_URL } from '../../../api';
 
 export default function TabLayout() {
+    const { token } = useAuth();
+
+    useEffect(() => {
+        if (!token) return;
+
+        registerForPushNotificationsAsync().then(async (pushToken) => {
+            if (pushToken) {
+                try {
+                    await fetch(`${API_URL}/api/users/push-token`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ pushToken })
+                    });
+                } catch (error) {
+                    console.error('Failed to save push token to DB', error);
+                }
+            }
+        });
+    }, [token]);
+
     return (
         <Tabs
             screenOptions={{
